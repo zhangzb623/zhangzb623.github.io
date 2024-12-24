@@ -5,13 +5,13 @@
     <loc>http://localhost:1313/</loc>
     <lastmod>2024-12-18T01:00:15+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/hugohugo-github%E5%85%8D%E8%B4%B9%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2024-12-18T01:00:15+08:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/categories/</loc>
     <lastmod>2024-12-18T01:00:15+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/hugo/</loc>
+    <lastmod>2024-12-18T01:00:15+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/p/hugo-github-builder/</loc>
     <lastmod>2024-12-18T01:00:15+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/post/</loc>
