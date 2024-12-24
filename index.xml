@@ -13,7 +13,7 @@
         <pubDate>Wed, 18 Dec 2024 01:00:15 +0800</pubDate>
         
         <guid>http://localhost:1313/p/hugo-github-builder/</guid>
-        <description>&lt;h2 id=&#34;hugohugo--github-免费部署自己的博客&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;【Hugo】Hugo + Github 免费部署自己的博客&lt;/a&gt;
+        <description>&lt;img src="http://localhost:1313/p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hugo.png" alt="Featured image of post 【Hugo】Hugo &#43; Github 免费部署自己的博客" /&gt;&lt;h2 id=&#34;hugohugo--github-免费部署自己的博客&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;【Hugo】Hugo + Github 免费部署自己的博客&lt;/a&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;使用hugo工具生成静态页面然后在github上部署静态页面来免费搭建自己的博客&#34;&gt;使用hugo工具生成静态页面，然后在github上部署静态页面，来免费搭建自己的博客
 &lt;/h3&gt;&lt;hr&gt;
 &lt;h2 id=&#34;1-环境准备&#34;&gt;1 环境准备
