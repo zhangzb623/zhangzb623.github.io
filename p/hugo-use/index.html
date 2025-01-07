@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="A brief guide to setup KaTeX">
-<title>Math Typesetting</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="使用hugo生成博客内容，进行编辑使用">
+<title>【Hugo】Hugo的使用</title>
 
-<link rel='canonical' href='http://localhost:1313/p/math-typesetting/'>
+<link rel='canonical' href='http://localhost:1313/p/hugo-use/'>
 
-<link rel="stylesheet" href="../../scss/style.min.646290e0fbc903abeb391088fc131d1a71f87fac20cafb3844049aa73971d580.css"><meta property='og:title' content="Math Typesetting">
-<meta property='og:description' content="A brief guide to setup KaTeX">
-<meta property='og:url' content='http://localhost:1313/p/math-typesetting/'>
+<link rel="stylesheet" href="../../scss/style.min.646290e0fbc903abeb391088fc131d1a71f87fac20cafb3844049aa73971d580.css"><meta property='og:title' content="【Hugo】Hugo的使用">
+<meta property='og:description' content="使用hugo生成博客内容，进行编辑使用">
+<meta property='og:url' content='http://localhost:1313/p/hugo-use/'>
 <meta property='og:site_name' content='zhangzb623'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2019-03-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2019-03-08T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Math Typesetting">
-<meta name="twitter:description" content="A brief guide to setup KaTeX">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='hugo' /><meta property='article:published_time' content='2025-01-07T16:16:59&#43;08:00'/><meta property='article:modified_time' content='2025-01-07T16:16:59&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/hugo-use/hugo-logo.svg' />
+<meta name="twitter:title" content="【Hugo】Hugo的使用">
+<meta name="twitter:description" content="使用hugo生成博客内容，进行编辑使用"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/hugo-use/hugo-logo.svg' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -303,7 +304,12 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#examples">Examples</a></li>
+        <li><a href="#使用hugo生成博客内容进行编辑使用">使用hugo生成博客内容，进行编辑使用</a>
+          <ol>
+            <li><a href="#重要的目录">重要的目录</a></li>
+            <li><a href="#文章">文章</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -317,20 +323,36 @@
 
 
             <main class="main full-width">
-    <article class="main-article">
+    <article class="has-image main-article">
     <header class="article-header">
+        <div class="article-image">
+            <a href="../../p/hugo-use/">
+                
+                    <img src="../../p/hugo-use/hugo-logo.svg" loading="lazy" alt="Featured image of post 【Hugo】Hugo的使用" />
+                
+            </a>
+        </div>
+    
 
     <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="../../categories/%E6%95%99%E7%A8%8B/" >
+                教程
+            </a>
+        
+    </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="../../p/math-typesetting/">Math Typesetting</a>
+            <a href="../../p/hugo-use/">【Hugo】Hugo的使用</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            A brief guide to setup KaTeX
+            使用hugo生成博客内容，进行编辑使用
         </h3>
         
     </div>
@@ -351,7 +373,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2019-03-08</time>
+                <time class="article-time--published">2025-01-07</time>
             </div>
         
 
@@ -367,78 +389,152 @@
     <section class="article-content">
     
     
-    <p>Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.</p>
-<p>In this example we will be using <a class="link" href="https://katex.org/"  target="_blank" rel="noopener"
-    >KaTeX</a></p>
-<ul>
-<li>Create a partial under <code>/layouts/partials/math.html</code></li>
-<li>Within this partial reference the <a class="link" href="https://katex.org/docs/autorender.html"  target="_blank" rel="noopener"
-    >Auto-render Extension</a> or host these scripts locally.</li>
-<li>Include the partial in your templates like so:</li>
-</ul>
+    <h1 id="hugohugo的使用"><a class="link" href="" >【Hugo】Hugo的使用</a>
+</h1><h3 id="使用hugo生成博客内容进行编辑使用">使用hugo生成博客内容，进行编辑使用
+</h3><h4 id="重要的目录">重要的目录
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="se">\c</span>ontent<span class="se">\p</span>ost<span class="se">\文</span>章路径<span class="se">\i</span>ndex.md  -- 文章目录
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="se">\c</span>ontent<span class="se">\p</span>age<span class="se">\	</span>			-- 首页左边展示的各项目 如下
+</span></span><span class="line"><span class="cl"><span class="se">\c</span>ontent<span class="se">\p</span>age<span class="se">\l</span>inks<span class="se">\i</span>ndex.md	-- 收藏链接
+</span></span><span class="line"><span class="cl"><span class="se">\c</span>ontent<span class="se">\p</span>age<span class="se">\a</span>rchives<span class="se">\i</span>ndex.md	-- 归档（分类<span class="p">&amp;</span>标签）
+</span></span><span class="line"><span class="cl"><span class="se">\c</span>ontent<span class="se">\p</span>age<span class="se">\a</span>bout<span class="se">\i</span>ndex.md	-- 关于
+</span></span><span class="line"><span class="cl"><span class="se">\c</span>ontent<span class="se">\p</span>age<span class="se">\s</span>earch<span class="se">\i</span>ndex.md	-- 搜索
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="文章">文章
+</h4><h5 id="创建文章">创建文章
+</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">./hugo new content post/文章路径/index.md
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="文章结构">文章结构
+</h5><p><img src="../../p/hugo-use/index.assets/image-20250107162912261.png"
+	width="926"
+	height="331"
+	srcset="../../p/hugo-use/index.assets/image-20250107162912261_hu2730858342161642984.png 480w, ../../p/hugo-use/index.assets/image-20250107162912261_hu10744642051138491870.png 1024w"
+	loading="lazy"
+	
+		alt="image-20250107162912261"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="279"
+		data-flex-basis="671px"
+	
+></p>
 <div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">slug = &#39;hugo-github-builder&#39;
+</span></span><span class="line"><span class="cl">description = &#34;这是一个副标题&#34;
+</span></span><span class="line"><span class="cl">categories = [
+</span></span><span class="line"><span class="cl">    &#34;java&#34;,
+</span></span><span class="line"><span class="cl">    &#34;spring&#34;
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">tags = [
+</span></span><span class="line"><span class="cl">    &#34;java&#34;,
+</span></span><span class="line"><span class="cl">    &#34;测试&#34;
+</span></span><span class="line"><span class="cl">]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">image = &#34;封面_hugo.png&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="上传github命令">上传github命令
+</h5><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">{{</span> <span class="k">if</span> or .Params.math .Site.Params.math <span class="o">}}</span>
-</span></span><span class="line"><span class="cl"><span class="o">{{</span> partial <span class="s2">&#34;math.html&#34;</span> . <span class="o">}}</span>
-</span></span><span class="line"><span class="cl"><span class="o">{{</span> end <span class="o">}}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m &#34;&#34;
+</span></span><span class="line"><span class="cl">git push
 </span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li>To enable KaTeX globally set the parameter <code>math</code> to <code>true</code> in a project&rsquo;s configuration</li>
-<li>To enable KaTeX on a per page basis include the parameter <code>math: true</code> in content files</li>
-</ul>
-<p><strong>Note:</strong> Use the online reference of <a class="link" href="https://katex.org/docs/supported.html"  target="_blank" rel="noopener"
-    >Supported TeX Functions</a></p>
-
-<h3 id="examples">Examples
-</h3><p>Inline math: $\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$</p>
-$$
- \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
-$$
+</div>
 </section>
 
 
     <footer class="article-footer">
     
+    <section class="article-tags">
+        
+            <a href="../../tags/hugo/">Hugo</a>
+        
+    </section>
+
 
     </footer>
 
 
-    
-        <link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
-            ><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
-                defer
-                >
-            </script><script>
-    window.addEventListener("DOMContentLoaded", () => {
-        renderMathInElement(document.body, {
-            delimiters: [
-                { left: "$$", right: "$$", display: true },
-                { left: "$", right: "$", display: false },
-                { left: "\\(", right: "\\)", display: false },
-                { left: "\\[", right: "\\]", display: true }
-            ],
-            ignoredClasses: ["gist"]
-        });})
-</script>
     
 </article>
 
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="../../p/hugo-github-builder/">
+        
+        
+            <div class="article-image">
+                <img src="../../p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hu12087363903772975845.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【Hugo】Hugo &#43; Github 免费部署自己的博客"
+                        data-key="hugo-github-builder" 
+                        data-hash="md5-F6hHf0f3D5y0e8MQFstzvQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Hugo】Hugo &#43; Github 免费部署自己的博客</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
