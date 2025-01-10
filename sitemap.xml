@@ -3,21 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/</loc>
-    <lastmod>2025-01-07T16:16:59+08:00</lastmod>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/p/hugo-github-builder/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/im/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/im/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/java/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/netty/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-01-08T00:17:54+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/p/hugo-use/</loc>
     <lastmod>2025-01-07T16:16:59+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
-    <lastmod>2025-01-07T16:16:59+08:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2025-01-07T16:16:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2025-01-07T16:16:59+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-01-07T16:16:59+08:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</loc>

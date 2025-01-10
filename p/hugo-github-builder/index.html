@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="【Hugo】Hugo + Github 免费部署自己的博客 使用hugo工具生成静态页面，然后在github上部署静态页面，来免费搭建自己的博客 1 环境准备 1.1 Git下载 前往【Git官网】，下载安装程序 一直点下一步，默认安装即可 ">
-<title>【Hugo】Hugo &#43; Github 免费部署自己的博客</title>
+<title>【IM】IM的知识点和实现难题</title>
 
 <link rel='canonical' href='http://localhost:1313/p/hugo-github-builder/'>
 
-<link rel="stylesheet" href="../../scss/style.min.646290e0fbc903abeb391088fc131d1a71f87fac20cafb3844049aa73971d580.css"><meta property='og:title' content="【Hugo】Hugo + Github 免费部署自己的博客">
+<link rel="stylesheet" href="../../scss/style.min.646290e0fbc903abeb391088fc131d1a71f87fac20cafb3844049aa73971d580.css"><meta property='og:title' content="【IM】IM的知识点和实现难题">
 <meta property='og:description' content="【Hugo】Hugo + Github 免费部署自己的博客 使用hugo工具生成静态页面，然后在github上部署静态页面，来免费搭建自己的博客 1 环境准备 1.1 Git下载 前往【Git官网】，下载安装程序 一直点下一步，默认安装即可 ">
 <meta property='og:url' content='http://localhost:1313/p/hugo-github-builder/'>
 <meta property='og:site_name' content='zhangzb623'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='hugo' /><meta property='article:published_time' content='2024-12-18T01:00:15&#43;08:00'/><meta property='article:modified_time' content='2024-12-18T01:00:15&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hugo.png' />
-<meta name="twitter:title" content="【Hugo】Hugo + Github 免费部署自己的博客">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='IM' /><meta property='article:tag' content='netty' /><meta property='article:published_time' content='2025-01-08T00:17:54&#43;08:00'/><meta property='article:modified_time' content='2025-01-08T00:17:54&#43;08:00'/><meta property='og:image' content='http://localhost:1313/%E5%B0%81%E9%9D%A2_hugo.png' />
+<meta name="twitter:title" content="【IM】IM的知识点和实现难题">
 <meta name="twitter:description" content="【Hugo】Hugo + Github 免费部署自己的博客 使用hugo工具生成静态页面，然后在github上部署静态页面，来免费搭建自己的博客 1 环境准备 1.1 Git下载 前往【Git官网】，下载安装程序 一直点下一步，默认安装即可 "><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hugo.png' />
+    <meta name="twitter:image" content='http://localhost:1313/%E5%B0%81%E9%9D%A2_hugo.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -302,27 +302,28 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#hugohugo--github-免费部署自己的博客"><a href="">【Hugo】Hugo + Github 免费部署自己的博客</a></a>
+    <li>
       <ol>
-        <li><a href="#使用hugo工具生成静态页面然后在github上部署静态页面来免费搭建自己的博客">使用hugo工具生成静态页面，然后在github上部署静态页面，来免费搭建自己的博客</a></li>
+        <li><a href="#im核心概念"><strong>IM核心概念</strong></a></li>
+        <li><a href="#读扩散和写扩散通常针对群聊">读扩散和写扩散【通常针对群聊】</a></li>
+        <li><a href="#消息id设计">消息ID设计</a>
+          <ol>
+            <li><a href="#涉及分布式唯一id方案有许多种im中用于消息id和会话id">涉及分布式唯一ID，方案有许多种。IM中用于<em>消息ID</em>和<em>会话ID</em>。</a></li>
+            <li><a href="#是否需要递增">是否需要递增</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-    <li><a href="#1-环境准备">1 环境准备</a>
+    <li><a href="#im计划与难点">IM计划与难点</a>
       <ol>
-        <li><a href="#11-git下载">1.1 Git下载</a></li>
-        <li><a href="#12-hugo下载">1.2 Hugo下载</a></li>
-      </ol>
-    </li>
-    <li><a href="#2-搭建博客">2 搭建博客</a>
-      <ol>
-        <li><a href="#21-创建博客">2.1 创建博客</a></li>
-        <li><a href="#22-配置主题">2.2 配置主题</a></li>
-      </ol>
-    </li>
-    <li><a href="#3-github部署">3 Github部署</a>
-      <ol>
-        <li><a href="#31-常规部署">3.1 常规部署</a></li>
-        <li><a href="#32-github-action自动部署">3.2 Github Action自动部署</a></li>
+        <li><a href="#消息格式">消息格式</a></li>
+        <li><a href="#存储">存储</a></li>
+        <li><a href="#模块划分可水平扩张">模块划分（可水平扩张）</a></li>
+        <li><a href="#数据流架构">数据流架构</a>
+          <ol>
+            <li><a href="#推拉模式">推拉模式</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -340,12 +341,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="../../p/hugo-github-builder/">
-                <img src="../../p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hu16569893134495640000.png"
-                        srcset="../../p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hu16569893134495640000.png 800w, ../../p/hugo-github-builder/%E5%B0%81%E9%9D%A2_hu3621582957542490460.png 1600w"
-                        width="800" 
-                        height="367" 
-                        loading="lazy"
-                        alt="Featured image of post 【Hugo】Hugo &#43; Github 免费部署自己的博客" />
+                
+                    <img src="../../%e5%b0%81%e9%9d%a2_hugo.png" loading="lazy" alt="Featured image of post 【IM】IM的知识点和实现难题" />
                 
             </a>
         </div>
@@ -355,8 +352,12 @@
     
     <header class="article-category">
         
-            <a href="../../categories/%E6%95%99%E7%A8%8B/" >
-                教程
+            <a href="../../categories/java/" >
+                Java
+            </a>
+        
+            <a href="../../categories/im/" >
+                IM
             </a>
         
     </header>
@@ -364,9 +365,13 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="../../p/hugo-github-builder/">【Hugo】Hugo &#43; Github 免费部署自己的博客</a>
+            <a href="../../p/hugo-github-builder/">【IM】IM的知识点和实现难题</a>
         </h2>
     
+        
+        <h3 class="article-subtitle">
+            IM知识点扫盲和难点前置
+        </h3>
         
     </div>
 
@@ -386,7 +391,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2024-12-18</time>
+                <time class="article-time--published">2025-01-08</time>
             </div>
         
 
@@ -402,475 +407,163 @@
     <section class="article-content">
     
     
-    <h2 id="hugohugo--github-免费部署自己的博客"><a class="link" href="" >【Hugo】Hugo + Github 免费部署自己的博客</a>
-</h2><h3 id="使用hugo工具生成静态页面然后在github上部署静态页面来免费搭建自己的博客">使用hugo工具生成静态页面，然后在github上部署静态页面，来免费搭建自己的博客
-</h3><hr>
-<h2 id="1-环境准备">1 环境准备
-</h2><h3 id="11-git下载">1.1 Git下载
+    <h1 id="imim的知识点和实现难题"><a class="link" href="" >【IM】IM的知识点和实现难题</a>
+</h1><h3 id="im核心概念"><strong>IM核心概念</strong>
 </h3><ul>
-<li>前往【<a class="link" href="https://git-scm.com/"  target="_blank" rel="noopener"
-    >Git官网</a>】，下载安装程序</li>
-<li>一直点下一步，默认安装即可</li>
+<li>用户：系统的使用者</li>
+<li>消息：是指用户之间的沟通内容。通常在IM系统中，消息会有以下几类：文本消息、表情消息、图片消息、视频消息、文件消息等等</li>
+<li>会话：通常指两个用户之间因聊天而建立起的关联</li>
+<li>群：通常指多个用户之间因聊天而建立起的关联</li>
+<li>终端：指用户使用IM系统的机器。通常有Android端、iOS端、Web端等等</li>
+<li>未读数：指用户还没读的消息数量</li>
+<li>用户状态：指用户当前是在线、离线还是挂起等状态</li>
+<li>关系链：是指用户与用户之间的关系，通常有单向的好友关系、双向的好友关系、关注关系等等。这里需要注意与会话的区别，用户只有在发起聊天时才产生会话，但关系并不需要聊天才能建立。对于关系链的存储，可以使用图数据库（Neo4j等等），可以很自然地表达现实世界中的关系，易于建模</li>
+<li>单聊：一对一聊天</li>
+<li>群聊：多人聊天</li>
+<li>客服：在电商领域，通常需要对用户提供售前咨询、售后咨询等服务。这时，就需要引入客服来处理用户的咨询</li>
+<li>消息分流：在电商领域，一个店铺通常会有多个客服，此时决定用户的咨询由哪个客服来处理就是消息分流。通常消息分流会根据一系列规则来确定消息会分流给哪个客服，例如客服是否在线（客服不在线的话需要重新分流给另一个客服）、该消息是售前咨询还是售后咨询、当前客服的繁忙程度等等</li>
+<li>信箱：本文的信箱我们指一个Timeline、一个收发消息的队列</li>
 </ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/git%E4%B8%8B%E8%BD%BD.png"
-	width="1045"
-	height="420"
-	srcset="../../p/hugo-github-builder/index.assets/git%E4%B8%8B%E8%BD%BD_hu12103083040612969155.png 480w, ../../p/hugo-github-builder/index.assets/git%E4%B8%8B%E8%BD%BD_hu11927679261303541557.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="248"
-		data-flex-basis="597px"
-	
-></a></p>
-<hr>
-<h3 id="12-hugo下载">1.2 Hugo下载
-</h3><ul>
-<li>前往【<a class="link" href="https://github.com/gohugoio/hugo/tags"  target="_blank" rel="noopener"
-    >Hugo Github Tags</a>】，选择对应版本下载，下载后解压即可</li>
-<li>Windows下载版本：<strong>hugo_extended_xxxxx_windows_amd64.zip</strong></li>
+<h3 id="读扩散和写扩散通常针对群聊">读扩散和写扩散【通常针对群聊】
+</h3><h3 id="消息id设计">消息ID设计
+</h3><h4 id="涉及分布式唯一id方案有许多种im中用于消息id和会话id">涉及分布式唯一ID，方案有许多种。IM中用于<em>消息ID</em>和<em>会话ID</em>。
+</h4><ul>
+<li><strong>基于Snowflake的ID生成方式</strong></li>
+<li>基于申请DB步长的生成方式</li>
+<li>基于Redis或者DB的自增ID生成方式</li>
+<li>特殊的规则生成唯一ID</li>
 </ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/hugo%E4%B8%8B%E8%BD%BD.png"
-	width="1195"
-	height="264"
-	srcset="../../p/hugo-github-builder/index.assets/hugo%E4%B8%8B%E8%BD%BD_hu15858465758439763034.png 480w, ../../p/hugo-github-builder/index.assets/hugo%E4%B8%8B%E8%BD%BD_hu17722830100017528196.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="452"
-		data-flex-basis="1086px"
-	
-></a></p>
-<hr>
-<h2 id="2-搭建博客">2 搭建博客
-</h2><h3 id="21-创建博客">2.1 创建博客
-</h3><ul>
-<li>（1）在<strong>hugo.exe</strong>所在文件夹的地址栏敲打cmd，然后Enter唤起命令行</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/1%E5%90%AF%E5%8A%A8cmd.png"
-	width="627"
-	height="223"
-	srcset="../../p/hugo-github-builder/index.assets/1%E5%90%AF%E5%8A%A8cmd_hu17847048786220277494.png 480w, ../../p/hugo-github-builder/index.assets/1%E5%90%AF%E5%8A%A8cmd_hu10611417904628283939.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="281"
-		data-flex-basis="674px"
-	
-></a></p>
-<ul>
-<li>（2）敲打命令<code>hugo new site xxxx</code>创建hugo文件</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/2newSite.png"
-	width="751"
-	height="236"
-	srcset="../../p/hugo-github-builder/index.assets/2newSite_hu3122308046660715862.png 480w, ../../p/hugo-github-builder/index.assets/2newSite_hu17054959501302615844.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="318"
-		data-flex-basis="763px"
-	
-></a></p>
-<ul>
-<li>（3）敲打命名<code>cd xxxx</code>切换目录，并把<strong>hugo.exe</strong>复制到刚生成的文件夹中</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/3cd.png"
-	width="842"
-	height="409"
-	srcset="../../p/hugo-github-builder/index.assets/3cd_hu914900251781706643.png 480w, ../../p/hugo-github-builder/index.assets/3cd_hu7455587607991263771.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="205"
-		data-flex-basis="494px"
-	
-></a></p>
-<ul>
-<li>（4）敲打命令<code>hugo server -D</code>启动服务，访问<a class="link" href="http://localhost:1313/"  target="_blank" rel="noopener"
-    >http://localhost:1313</a>，Ctrl+C停止服务 <strong>（hugo默认是没有主题的，需要进行主题配置）</strong></li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/4server.png"
-	width="749"
-	height="466"
-	srcset="../../p/hugo-github-builder/index.assets/4server_hu759523152192672934.png 480w, ../../p/hugo-github-builder/index.assets/4server_hu3105970367046092981.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="160"
-		data-flex-basis="385px"
-	
-></a></p>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/5pageNotFind.png"
-	width="535"
-	height="277"
-	srcset="../../p/hugo-github-builder/index.assets/5pageNotFind_hu14142279337497898002.png 480w, ../../p/hugo-github-builder/index.assets/5pageNotFind_hu3905542197507831849.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="193"
-		data-flex-basis="463px"
-	
-></a></p>
-<hr>
-<h3 id="22-配置主题">2.2 配置主题
-</h3><ul>
-<li>（1）前往【<a class="link" href="https://themes.gohugo.io/"  target="_blank" rel="noopener"
-    >Hugo Themes</a>】，查找自己喜欢的主题，进行下载</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/1.1hugo%E4%B8%BB%E9%A2%98%E4%B8%8B%E8%BD%BD.png"
-	width="1491"
-	height="645"
-	srcset="../../p/hugo-github-builder/index.assets/1.1hugo%E4%B8%BB%E9%A2%98%E4%B8%8B%E8%BD%BD_hu3884244861959241836.png 480w, ../../p/hugo-github-builder/index.assets/1.1hugo%E4%B8%BB%E9%A2%98%E4%B8%8B%E8%BD%BD_hu14326899821210437207.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="231"
-		data-flex-basis="554px"
-	
-></a></p>
-<ul>
-<li>（2）这边以【<a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack/tags"  target="_blank" rel="noopener"
-    >Stack主题</a>】为例，将下载好的主题解压，放到<code>/themes</code>文件夹中</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/1.2%E4%B8%BB%E9%A2%98%E8%A7%A3%E5%8E%8B.png"
-	width="534"
-	height="453"
-	srcset="../../p/hugo-github-builder/index.assets/1.2%E4%B8%BB%E9%A2%98%E8%A7%A3%E5%8E%8B_hu18019446707079695737.png 480w, ../../p/hugo-github-builder/index.assets/1.2%E4%B8%BB%E9%A2%98%E8%A7%A3%E5%8E%8B_hu8909256151664846444.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="117"
-		data-flex-basis="282px"
-	
-></a></p>
-<ul>
-<li>（3）将<code>exampleSite</code>样例数据中的 <strong>Content</strong> 和 <strong>hugo.yaml</strong> 复制到主文件夹中，并删掉<code>hugo.toml</code>和<code>content/post/rich-content</code></li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/1.3%E4%B8%BB%E9%A2%98%E5%A4%8D%E5%88%B61.png"
-	width="296"
-	height="251"
-	srcset="../../p/hugo-github-builder/index.assets/1.3%E4%B8%BB%E9%A2%98%E5%A4%8D%E5%88%B61_hu14737932469267142275.png 480w, ../../p/hugo-github-builder/index.assets/1.3%E4%B8%BB%E9%A2%98%E5%A4%8D%E5%88%B61_hu6233231816324566059.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="117"
-		data-flex-basis="283px"
-	
-></a></p>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/1.4%E4%B8%BB%E9%A2%98%E5%A4%8D%E5%88%B62.png"
-	width="374"
-	height="244"
-	srcset="../../p/hugo-github-builder/index.assets/1.4%E4%B8%BB%E9%A2%98%E5%A4%8D%E5%88%B62_hu3670930292275600289.png 480w, ../../p/hugo-github-builder/index.assets/1.4%E4%B8%BB%E9%A2%98%E5%A4%8D%E5%88%B62_hu16263024395150776200.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="153"
-		data-flex-basis="367px"
-	
-></a></p>
-<ul>
-<li>（4）修改 <strong>hugo.yaml</strong> 中的 <strong>theme</strong>，将他修改为跟主题文件夹同名</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/1.5%E4%B8%BB%E9%A2%98%E5%90%8D%E4%BF%AE%E6%94%B9.png"
-	width="457"
-	height="375"
-	srcset="../../p/hugo-github-builder/index.assets/1.5%E4%B8%BB%E9%A2%98%E5%90%8D%E4%BF%AE%E6%94%B9_hu16474799724051967686.png 480w, ../../p/hugo-github-builder/index.assets/1.5%E4%B8%BB%E9%A2%98%E5%90%8D%E4%BF%AE%E6%94%B9_hu14466086748644176880.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="121"
-		data-flex-basis="292px"
-	
-></a></p>
-<ul>
-<li>（5）再次启动hugo服务，查看主题，具体主题配置修改 <strong>hugo.yaml</strong>，这里不细说，感兴趣可自行查找相关文章</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/stack%E4%B8%BB%E9%A2%98.png"
-	width="1912"
-	height="987"
-	srcset="../../p/hugo-github-builder/index.assets/stack%E4%B8%BB%E9%A2%98_hu13058455221565664461.png 480w, ../../p/hugo-github-builder/index.assets/stack%E4%B8%BB%E9%A2%98_hu13097401748800935351.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="193"
-		data-flex-basis="464px"
-	
-></a></p>
-<hr>
-<h2 id="3-github部署">3 Github部署
-</h2><h3 id="31-常规部署">3.1 常规部署
-</h3><ul>
-<li>（1）前往【<a class="link" href="https://github.com/"  target="_blank" rel="noopener"
-    >Github官网</a>】，创建仓库 <strong>{github用户名}.github.io</strong></li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/github%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA.png"
-	width="683"
-	height="163"
-	srcset="../../p/hugo-github-builder/index.assets/github%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA_hu13636233454874534047.png 480w, ../../p/hugo-github-builder/index.assets/github%E4%BB%93%E5%BA%93%E5%88%9B%E5%BB%BA_hu14029540066389114074.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="419"
-		data-flex-basis="1005px"
-	
-></a></p>
-<ul>
-<li>（2）前往<code>Setting -&gt; Pages -&gt; Branch</code>选择main分支，然后保存，会自动开启 <strong>https://{github用户名}.github.io</strong> 的地址，这地址也是以后访问博客的地址</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/githubPage%E5%90%AF%E5%8A%A8.png"
-	width="872"
-	height="555"
-	srcset="../../p/hugo-github-builder/index.assets/githubPage%E5%90%AF%E5%8A%A8_hu7152301421823947195.png 480w, ../../p/hugo-github-builder/index.assets/githubPage%E5%90%AF%E5%8A%A8_hu1901808604315730425.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="157"
-		data-flex-basis="377px"
-	
-></a></p>
-<ul>
-<li>（3）回到hugo文件中，执行命令<code>hugo -D</code>，会生成 <strong>public</strong> 静态资源文件夹</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6.png"
-	width="698"
-	height="556"
-	srcset="../../p/hugo-github-builder/index.assets/%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6_hu13746208741483579646.png 480w, ../../p/hugo-github-builder/index.assets/%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6_hu4371999441949824785.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="125"
-		data-flex-basis="301px"
-	
-></a></p>
-<ul>
-<li>（4）在 <strong>public</strong> 执行以下命令上传到github仓库上，第一次上传可能需要输入账号密码</li>
-</ul>
-<div class="table-wrapper"><table><tbody><tr><td><pre tabindex="0"><code><span>1
-</span><span>2
-</span><span>3
-</span><span>4
-</span><span>5
-</span><span>6
-</span></code></pre></td><td><pre tabindex="0"></pre></td></tr></tbody></table></div>
-<ul>
-<li>（5）上传成功后访问 <strong>https://{github用户名}.github.io</strong>，成功搭建属于自己的Hugo博客</li>
-</ul>
-<hr>
-<h3 id="32-github-action自动部署">3.2 Github Action自动部署
-</h3><ul>
+<h4 id="是否需要递增">是否需要递增
+</h4><p>使用字符串，浪费存储空间，而且不能利用存储引擎的特性让相邻的消息存储在一起，降低消息的写入跟读取性能。</p>
+<p>使用数字，但数字随机，也不能利用存储引擎的特性让相邻的消息存储在一起，会加大随机IO，降低性能；而且随机的ID不好保证ID的唯一性
+因此，消息ID最好是递增的。</p>
+<h2 id="im计划与难点">IM计划与难点
+</h2><p>技术栈 java netty mongodb msql rocketmg rabbitmg springcloud redis</p>
+<ol>
+<li>messageId 消息ID设计 使用Snowflake生成唯一的递增消息</li>
+<li>消息风暴,总线风暴</li>
+<li>读扩散 写扩散 &mdash;-&gt;群消息</li>
+<li>消息存储</li>
+<li>按需拉取</li>
+</ol>
+<h3 id="消息格式">消息格式
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>字段</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>messageId</td>
+          <td>消息唯一标识</td>
+      </tr>
+      <tr>
+          <td>fromId</td>
+          <td>消息谁发的</td>
+      </tr>
+      <tr>
+          <td>destId</td>
+          <td>消息发送给谁的 好友消息(userId) 群消息(destId)</td>
+      </tr>
+      <tr>
+          <td>messageInfo</td>
+          <td>消息内容</td>
+      </tr>
+      <tr>
+          <td>messageMainType</td>
+          <td>消息类型，文本消息,图片消息，视频消息,红包消息,通知消息(好友操作通知,添加好友，删除好友,群消息通知)</td>
+      </tr>
+      <tr>
+          <td>messageSubType</td>
+          <td>用于消息扩展的</td>
+      </tr>
+      <tr>
+          <td>messageTime</td>
+          <td>消息发送的时间</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="存储">存储
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>存储中间件</th>
+          <th>存储内容与作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>mongodb</td>
+          <td>存储消息</td>
+      </tr>
+      <tr>
+          <td>mysql</td>
+          <td>用户信息 群信息</td>
+      </tr>
+      <tr>
+          <td>rocketmg</td>
+          <td>解耦消息PUSH PULL 离线消息解耦</td>
+      </tr>
+      <tr>
+          <td>rabbitmg</td>
+          <td>解耦红包消息</td>
+      </tr>
+      <tr>
+          <td>redis</td>
+          <td>用户信息，群信息，群用户对应关系</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="模块划分可水平扩张">模块划分（可水平扩张）
+</h3><ol>
 <li>
-<p>（1）Github创建一个新的仓库，用于存放Hugo的主文件</p>
+<p>manager  （用户注册，好友操作,群操作等一系列API操作）</p>
 </li>
 <li>
-<p>（2）前往<code>Setttings -&gt; Developer Settings -&gt; Personal access tokens</code>，创建一个token(classic)</p>
+<p>IM  （与app连接,用于接收和发送消息）</p>
 </li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/createToken1.png"
-	width="1462"
-	height="359"
-	srcset="../../p/hugo-github-builder/index.assets/createToken1_hu3225163424929124414.png 480w, ../../p/hugo-github-builder/index.assets/createToken1_hu8495560841693532671.png 1024w"
+<li>
+<p>Data Transfer  （接收IM推送到Rokcetmq中的用户发送的消息）</p>
+</li>
+<li>
+<p>offline  （离线服务,比如你发一个消息给你的好友,你好友离线黑屏了,这时候需要推送离线消息告知你好友）</p>
+</li>
+</ol>
+<h3 id="数据流架构">数据流架构
+</h3><h4 id="推拉模式">推拉模式
+</h4><h5 id="推模式">推模式
+</h5><p>用户发送消息
+APP &ndash;&gt;IM &ndash;&gt;rocketmq &ndash;&gt; Data transfer 消费 &ndash;&gt;数据全部落入mongodb数据库(发现该消息所属用户离线)&ndash;&gt;离线Rocketmg &ndash;&gt;Offline 消费 &ndash;&gt;手机SDK -&gt;推送用户通知</p>
+<p><img src="../../p/hugo-github-builder/index.assets/IM%E6%8E%A8%E6%A8%A1%E5%BC%8F.png"
+	width="2513"
+	height="1063"
+	srcset="../../p/hugo-github-builder/index.assets/IM%E6%8E%A8%E6%A8%A1%E5%BC%8F_hu14679569972668463016.png 480w, ../../p/hugo-github-builder/index.assets/IM%E6%8E%A8%E6%A8%A1%E5%BC%8F_hu2428780029024820739.png 1024w"
 	loading="lazy"
+	
+		alt="IM推模式"
 	
 	
 		class="gallery-image" 
-		data-flex-grow="407"
-		data-flex-basis="977px"
+		data-flex-grow="236"
+		data-flex-basis="567px"
 	
-></a></p>
+></p>
 <ul>
-<li>（3）token选择永不过期，并勾选 <strong>repo</strong> 和 <strong>workflow</strong> 选项</li>
+<li>好友消息：destId == userId 精准知道消息发给谁</li>
+<li>群消息：destId  == 群ID（userAId，userBId，userCId，&hellip;） 知道消息发给哪个用户集合【redis】</li>
 </ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/createToken2.png"
-	width="1050"
-	height="637"
-	srcset="../../p/hugo-github-builder/index.assets/createToken2_hu6150244707236553172.png 480w, ../../p/hugo-github-builder/index.assets/createToken2_hu13315092729391035093.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="164"
-		data-flex-basis="395px"
-	
-></a></p>
-<ul>
-<li>（4）为保证安全，将生成的token，保存的仓库的变量中，前往<code>Settings -&gt; Secrets and variables -&gt; Actions</code>中设置</li>
-</ul>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/createToken3.png"
-	width="842"
-	height="312"
-	srcset="../../p/hugo-github-builder/index.assets/createToken3_hu8435878091243039327.png 480w, ../../p/hugo-github-builder/index.assets/createToken3_hu4691990066752145827.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="269"
-		data-flex-basis="647px"
-	
-></a></p>
-<p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/setToken1.png"
-	width="1222"
-	height="712"
-	srcset="../../p/hugo-github-builder/index.assets/setToken1_hu4815040327071206833.png 480w, ../../p/hugo-github-builder/index.assets/setToken1_hu3578400413721326659.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="171"
-		data-flex-basis="411px"
-	
-></a></p>
-<ul>
-<li>（5）在hugo主文件创建一个<code>.github/workflows/xxxx.yaml</code>文件，将以下内容复制进去，想具体了解更多，可查看【<a class="link" href="https://docs.github.com/zh/actions"  target="_blank" rel="noopener"
-    >Github Action文档</a>】</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">name: deploy
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 代码提交到main分支时触发github action</span>
-</span></span><span class="line"><span class="cl">on:
-</span></span><span class="line"><span class="cl">  push:
-</span></span><span class="line"><span class="cl">    branches:
-</span></span><span class="line"><span class="cl">      - main
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">jobs:
-</span></span><span class="line"><span class="cl">  deploy:
-</span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
-</span></span><span class="line"><span class="cl">    steps:
-</span></span><span class="line"><span class="cl">        - name: Checkout
-</span></span><span class="line"><span class="cl">          uses: actions/checkout@v4
-</span></span><span class="line"><span class="cl">          with:
-</span></span><span class="line"><span class="cl">              fetch-depth: <span class="m">0</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        - name: Setup Hugo
-</span></span><span class="line"><span class="cl">          uses: peaceiris/actions-hugo@v3
-</span></span><span class="line"><span class="cl">          with:
-</span></span><span class="line"><span class="cl">              hugo-version: <span class="s2">&#34;latest&#34;</span>
-</span></span><span class="line"><span class="cl">              extended: <span class="nb">true</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        - name: Build Web
-</span></span><span class="line"><span class="cl">          run: hugo -D
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        - name: Deploy Web
-</span></span><span class="line"><span class="cl">          uses: peaceiris/actions-gh-pages@v4
-</span></span><span class="line"><span class="cl">          with:
-</span></span><span class="line"><span class="cl">              PERSONAL_TOKEN: <span class="si">${</span><span class="p">{ secrets.你的token变量名 </span><span class="si">}</span><span class="o">}</span>
-</span></span><span class="line"><span class="cl">              EXTERNAL_REPOSITORY: 你的github名/你的仓库名
-</span></span><span class="line"><span class="cl">              PUBLISH_BRANCH: main
-</span></span><span class="line"><span class="cl">              PUBLISH_DIR: ./public
-</span></span><span class="line"><span class="cl">              commit_message: auto deploy
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>（6）在hugo主文件创建<code>.gitignore</code>文件，来避免提交不必要的文件</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 自动生成的文件</span>
-</span></span><span class="line"><span class="cl">public
-</span></span><span class="line"><span class="cl">resources
-</span></span><span class="line"><span class="cl">.hugo_build.lock
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># hugo命令</span>
-</span></span><span class="line"><span class="cl">hugo.exe
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>（7）将hugo的主文件上传到仓库，上传成功后会触发Github Action，来自动部署你的静态页面</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">git init
-</span></span><span class="line"><span class="cl">git add .
-</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;first commit&#34;</span>
-</span></span><span class="line"><span class="cl">git branch -M main
-</span></span><span class="line"><span class="cl">git remote add origin <span class="o">{</span>你的github仓库地址<span class="o">}</span>
-</span></span><span class="line"><span class="cl">git push -u origin main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><a class="link" href="" ><img src="../../p/hugo-github-builder/index.assets/githubActionRun.png"
-	width="1635"
-	height="398"
-	srcset="../../p/hugo-github-builder/index.assets/githubActionRun_hu924624790113105530.png 480w, ../../p/hugo-github-builder/index.assets/githubActionRun_hu14556014354036984040.png 1024w"
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="410"
-		data-flex-basis="985px"
-	
-></a></p>
-<hr>
+<p>疑问：推模式下，发送消息明确知道推给谁，为什么不直接推送，这样推送的及时性不是更好？</p>
+<p>如果是群消息，如果有1000个群，群里有100人，那qps就是10w，这个qps是根据群的数量和群人数变化的，这样就把可控性交给客户，系统本身不可控。</p>
+<h5 id="拉模式">拉模式
+</h5><p>定时轮询  &ndash;&gt; 限制每次拉取消息只能拉40条，系统可控，10000个用户，每秒轮询一次，qps 就是10000，也就是说系统qps由在线用户决定，推模式会引发消息风暴和总线风暴.</p>
+<p>messageId 雪花算法，全局递增，70年。2、服务器存根消息Id，客户端拉取到一条消息，或者一批消息，会向服务器确认，1，&ndash;&gt;commitId 就是 1,1 -10 就是 10，存根消息Id 就是客户端拉取展示的最后一条消息Id.
+用户A 存根消息Id 10,
+用户B &ndash;&gt;用户A 发送了一条消息，16 全局递增。destId 就是用户Id 的userAId
+拉数据的时候 10，messageId &gt;10 &amp;&amp; destId in(userAId)如果是群groudId
+messageId &gt;10 &amp;&amp; destId in(userAId,groupId) limit 40.
+这里是有一个问题的，每次心跳我都需要查，这样对mongodb性能消耗很大的，空跑</p>
 
 </section>
 
@@ -879,7 +572,9 @@
     
     <section class="article-tags">
         
-            <a href="../../tags/hugo/">Hugo</a>
+            <a href="../../tags/im/">IM</a>
+        
+            <a href="../../tags/netty/">Netty</a>
         
     </section>
 
@@ -893,34 +588,6 @@
     
 
     
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="../../p/hugo-use/">
-        
-        
-            <div class="article-image">
-                
-                    <img src="../../p/hugo-use/hugo-logo.svg" loading="lazy" data-key="hugo-use" data-hash="/p/hugo-use/hugo-logo.svg"/>
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Hugo】Hugo的使用</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
-    </div>
-</aside>
 
      
     

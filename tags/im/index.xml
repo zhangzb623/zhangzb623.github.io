@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>IM on zhangzb623</title>
+        <link>http://localhost:1313/tags/im/</link>
+        <description>Recent content in IM on zhangzb623</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>zhangzb623</copyright>
+        <lastBuildDate>Wed, 08 Jan 2025 00:17:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/im/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【IM】IM的知识点和实现难题</title>
+        <link>http://localhost:1313/p/hugo-github-builder/</link>
+        <pubDate>Wed, 08 Jan 2025 00:17:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/hugo-github-builder/</guid>
+        <description>&lt;img src="http://localhost:1313/%E5%B0%81%E9%9D%A2_hugo.png" alt="Featured image of post 【IM】IM的知识点和实现难题" /&gt;&lt;h1 id=&#34;imim的知识点和实现难题&#34;&gt;&lt;a class=&#34;link&#34; href=&#34;&#34; &gt;【IM】IM的知识点和实现难题&lt;/a&gt;
+&lt;/h1&gt;&lt;h3 id=&#34;im核心概念&#34;&gt;&lt;strong&gt;IM核心概念&lt;/strong&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;用户：系统的使用者&lt;/li&gt;
+&lt;li&gt;消息：是指用户之间的沟通内容。通常在IM系统中，消息会有以下几类：文本消息、表情消息、图片消息、视频消息、文件消息等等&lt;/li&gt;
+&lt;li&gt;会话：通常指两个用户之间因聊天而建立起的关联&lt;/li&gt;
+&lt;li&gt;群：通常指多个用户之间因聊天而建立起的关联&lt;/li&gt;
+&lt;li&gt;终端：指用户使用IM系统的机器。通常有Android端、iOS端、Web端等等&lt;/li&gt;
+&lt;li&gt;未读数：指用户还没读的消息数量&lt;/li&gt;
+&lt;li&gt;用户状态：指用户当前是在线、离线还是挂起等状态&lt;/li&gt;
+&lt;li&gt;关系链：是指用户与用户之间的关系，通常有单向的好友关系、双向的好友关系、关注关系等等。这里需要注意与会话的区别，用户只有在发起聊天时才产生会话，但关系并不需要聊天才能建立。对于关系链的存储，可以使用图数据库（Neo4j等等），可以很自然地表达现实世界中的关系，易于建模&lt;/li&gt;
+&lt;li&gt;单聊：一对一聊天&lt;/li&gt;
+&lt;li&gt;群聊：多人聊天&lt;/li&gt;
+&lt;li&gt;客服：在电商领域，通常需要对用户提供售前咨询、售后咨询等服务。这时，就需要引入客服来处理用户的咨询&lt;/li&gt;
+&lt;li&gt;消息分流：在电商领域，一个店铺通常会有多个客服，此时决定用户的咨询由哪个客服来处理就是消息分流。通常消息分流会根据一系列规则来确定消息会分流给哪个客服，例如客服是否在线（客服不在线的话需要重新分流给另一个客服）、该消息是售前咨询还是售后咨询、当前客服的繁忙程度等等&lt;/li&gt;
+&lt;li&gt;信箱：本文的信箱我们指一个Timeline、一个收发消息的队列&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;读扩散和写扩散通常针对群聊&#34;&gt;读扩散和写扩散【通常针对群聊】
+&lt;/h3&gt;&lt;h3 id=&#34;消息id设计&#34;&gt;消息ID设计
+&lt;/h3&gt;&lt;h4 id=&#34;涉及分布式唯一id方案有许多种im中用于消息id和会话id&#34;&gt;涉及分布式唯一ID，方案有许多种。IM中用于&lt;em&gt;消息ID&lt;/em&gt;和&lt;em&gt;会话ID&lt;/em&gt;。
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;基于Snowflake的ID生成方式&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;基于申请DB步长的生成方式&lt;/li&gt;
+&lt;li&gt;基于Redis或者DB的自增ID生成方式&lt;/li&gt;
+&lt;li&gt;特殊的规则生成唯一ID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;是否需要递增&#34;&gt;是否需要递增
+&lt;/h4&gt;&lt;p&gt;使用字符串，浪费存储空间，而且不能利用存储引擎的特性让相邻的消息存储在一起，降低消息的写入跟读取性能。&lt;/p&gt;
+&lt;p&gt;使用数字，但数字随机，也不能利用存储引擎的特性让相邻的消息存储在一起，会加大随机IO，降低性能；而且随机的ID不好保证ID的唯一性
+因此，消息ID最好是递增的。&lt;/p&gt;
+&lt;h2 id=&#34;im计划与难点&#34;&gt;IM计划与难点
+&lt;/h2&gt;&lt;p&gt;技术栈 java netty mongodb msql rocketmg rabbitmg springcloud redis&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;messageId 消息ID设计 使用Snowflake生成唯一的递增消息&lt;/li&gt;
+&lt;li&gt;消息风暴,总线风暴&lt;/li&gt;
+&lt;li&gt;读扩散 写扩散 &amp;mdash;-&amp;gt;群消息&lt;/li&gt;
+&lt;li&gt;消息存储&lt;/li&gt;
+&lt;li&gt;按需拉取&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;消息格式&#34;&gt;消息格式
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;字段&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;messageId&lt;/td&gt;
+          &lt;td&gt;消息唯一标识&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;fromId&lt;/td&gt;
+          &lt;td&gt;消息谁发的&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;destId&lt;/td&gt;
+          &lt;td&gt;消息发送给谁的 好友消息(userId) 群消息(destId)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;messageInfo&lt;/td&gt;
+          &lt;td&gt;消息内容&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;messageMainType&lt;/td&gt;
+          &lt;td&gt;消息类型，文本消息,图片消息，视频消息,红包消息,通知消息(好友操作通知,添加好友，删除好友,群消息通知)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;messageSubType&lt;/td&gt;
+          &lt;td&gt;用于消息扩展的&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;messageTime&lt;/td&gt;
+          &lt;td&gt;消息发送的时间&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;存储&#34;&gt;存储
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;存储中间件&lt;/th&gt;
+          &lt;th&gt;存储内容与作用&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mongodb&lt;/td&gt;
+          &lt;td&gt;存储消息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mysql&lt;/td&gt;
+          &lt;td&gt;用户信息 群信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;rocketmg&lt;/td&gt;
+          &lt;td&gt;解耦消息PUSH PULL 离线消息解耦&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;rabbitmg&lt;/td&gt;
+          &lt;td&gt;解耦红包消息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;redis&lt;/td&gt;
+          &lt;td&gt;用户信息，群信息，群用户对应关系&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;模块划分可水平扩张&#34;&gt;模块划分（可水平扩张）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;manager  （用户注册，好友操作,群操作等一系列API操作）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IM  （与app连接,用于接收和发送消息）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Data Transfer  （接收IM推送到Rokcetmq中的用户发送的消息）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;offline  （离线服务,比如你发一个消息给你的好友,你好友离线黑屏了,这时候需要推送离线消息告知你好友）&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;数据流架构&#34;&gt;数据流架构
+&lt;/h3&gt;&lt;h4 id=&#34;推拉模式&#34;&gt;推拉模式
+&lt;/h4&gt;&lt;h5 id=&#34;推模式&#34;&gt;推模式
+&lt;/h5&gt;&lt;p&gt;用户发送消息
+APP &amp;ndash;&amp;gt;IM &amp;ndash;&amp;gt;rocketmq &amp;ndash;&amp;gt; Data transfer 消费 &amp;ndash;&amp;gt;数据全部落入mongodb数据库(发现该消息所属用户离线)&amp;ndash;&amp;gt;离线Rocketmg &amp;ndash;&amp;gt;Offline 消费 &amp;ndash;&amp;gt;手机SDK -&amp;gt;推送用户通知&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../../p/hugo-github-builder/index.assets/IM%E6%8E%A8%E6%A8%A1%E5%BC%8F.png&#34;
+	width=&#34;2513&#34;
+	height=&#34;1063&#34;
+	srcset=&#34;../../p/hugo-github-builder/index.assets/IM%E6%8E%A8%E6%A8%A1%E5%BC%8F_hu14679569972668463016.png 480w, ../../p/hugo-github-builder/index.assets/IM%E6%8E%A8%E6%A8%A1%E5%BC%8F_hu2428780029024820739.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IM推模式&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;236&#34;
+		data-flex-basis=&#34;567px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;好友消息：destId == userId 精准知道消息发给谁&lt;/li&gt;
+&lt;li&gt;群消息：destId  == 群ID（userAId，userBId，userCId，&amp;hellip;） 知道消息发给哪个用户集合【redis】&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;疑问：推模式下，发送消息明确知道推给谁，为什么不直接推送，这样推送的及时性不是更好？&lt;/p&gt;
+&lt;p&gt;如果是群消息，如果有1000个群，群里有100人，那qps就是10w，这个qps是根据群的数量和群人数变化的，这样就把可控性交给客户，系统本身不可控。&lt;/p&gt;
+&lt;h5 id=&#34;拉模式&#34;&gt;拉模式
+&lt;/h5&gt;&lt;p&gt;定时轮询  &amp;ndash;&amp;gt; 限制每次拉取消息只能拉40条，系统可控，10000个用户，每秒轮询一次，qps 就是10000，也就是说系统qps由在线用户决定，推模式会引发消息风暴和总线风暴.&lt;/p&gt;
+&lt;p&gt;messageId 雪花算法，全局递增，70年。2、服务器存根消息Id，客户端拉取到一条消息，或者一批消息，会向服务器确认，1，&amp;ndash;&amp;gt;commitId 就是 1,1 -10 就是 10，存根消息Id 就是客户端拉取展示的最后一条消息Id.
+用户A 存根消息Id 10,
+用户B &amp;ndash;&amp;gt;用户A 发送了一条消息，16 全局递增。destId 就是用户Id 的userAId
+拉数据的时候 10，messageId &amp;gt;10 &amp;amp;&amp;amp; destId in(userAId)如果是群groudId
+messageId &amp;gt;10 &amp;amp;&amp;amp; destId in(userAId,groupId) limit 40.
+这里是有一个问题的，每次心跳我都需要查，这样对mongodb性能消耗很大的，空跑&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>zhangzb623</copyright>
-        <lastBuildDate>Tue, 07 Jan 2025 16:16:59 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 08 Jan 2025 00:17:54 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>IM</title>
+        <link>http://localhost:1313/categories/im/</link>
+        <pubDate>Wed, 08 Jan 2025 00:17:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/categories/im/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Java</title>
+        <link>http://localhost:1313/categories/java/</link>
+        <pubDate>Wed, 08 Jan 2025 00:17:54 +0800</pubDate>
+        
+        <guid>http://localhost:1313/categories/java/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>教程</title>
         <link>http://localhost:1313/categories/%E6%95%99%E7%A8%8B/</link>
         <pubDate>Tue, 07 Jan 2025 16:16:59 +0800</pubDate>
